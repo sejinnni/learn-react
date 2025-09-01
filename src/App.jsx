@@ -1,24 +1,24 @@
 import './App.css'
 import {useState} from 'react'
 
-const Counter = () => {
-  const [number,setNumber] = useState(0);
+function ToggleButton(){
+  const [isOn,setState] = useState(0);
   const handleClick=()=>{
-    setNumber(number+1);
+    setState(!isOn)
   }
+
   return(
-    <div>
-      <button onClick={handleClick}>number :{number} </button>
-    </div>
-  );
+    <>
+    <button onClick={handleClick}>
+      {isOn ? "on" : "off"}
+    </button>
+    </>
+  )
 }
 
 const App = () => {
-
   return (
-    <>
-       <Counter/>
-    </>
+    <ToggleButton/>
   )
 }
 
