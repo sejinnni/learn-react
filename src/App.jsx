@@ -1,24 +1,23 @@
 import './App.css'
 import {useState} from 'react'
 
-function ToggleButton(){
-  const [isOn,setState] = useState(0);
-  const handleClick=()=>{
-    setState(!isOn)
+function TextInput(){
+  const [text,setText] =useState("");
+  const handle = (e)=>{
+    setText(e.target.value);
   }
-
+  
   return(
-    <>
-    <button onClick={handleClick}>
-      {isOn ? "on" : "off"}
-    </button>
-    </>
+    <form>
+      <input type="text" value={text} onChange={handle}/>
+      <p>입력한 텍스트: {text}</p>
+    </form>
   )
 }
 
 const App = () => {
   return (
-    <ToggleButton/>
+    <TextInput/>
   )
 }
 
