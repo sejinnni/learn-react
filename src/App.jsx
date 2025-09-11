@@ -1,24 +1,22 @@
 import './App.css'
 import {useState} from 'react'
 
-function Message({count}){
-
+function Button({status, style}){
   return(
-      <div style={{display:"flex",gap:"20px"}}>
-        메시지<div style={{ backgroundColor:"red", padding:"0 12px", borderRadius:"4px"}}>{count === 0 ? 0 : count > 99 ? `99+` : count}</div>
-      </div>
+    <>
+    <button style={style}>
+      { status > 0 ? "구매하기" : status < 0 ? "품절" : "출시예정" } </button>
+    </>
   )
 }
 
 const App = () => {
   return (
-   <div style={{display:"flex",gap:"20px"}}>
-    <Message count={0}/>
-    <Message count={5}/>
-    <Message count={100}/>
-   </div> 
-    
-
+    <div style={{display:"flex", gap:"20px"}}>
+      <Button status={1} style={{backgroundColor:"#007bff"}}/>
+      <Button status={-1} style={{backgroundColor:"#6c757d"}} />
+      <Button status={0} style={{backgroundColor:"#6f42c1"}}/>
+    </div>
   )
 }
 
