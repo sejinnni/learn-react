@@ -1,23 +1,44 @@
 import './App.css'
 import {useState} from 'react'
 
-const fruits =["사과","바나나","오렌지","포도"];
+function InfoForm(){
+  const [name,setName] =useState("");
+  const [email,setEmail] = useState("");
+  const [form, setForm]=useState("");
 
-function FruitList({fruits}){
+  const handle=(e)=>{
+    setName(e.target.value);
+  }
+
+  const eHandle=(e)=>{
+    setEmail(e.target.value);
+  }
+
+  const submitHandle=(e)=>{
+    e.preventDefault();
+    setForm({name, email});
+
+    setName("");
+    setEmail("");
+  }
+
   return(
     <div>
-      {fruits.map((fruit,index)=>(
-        <ul key={index}>
-          <li>{fruit}</li>
-        </ul>
-      ))}
+      <form onSubmit={submitHandle}>
+        <p>이름 : <input type="text" value={name} onChange={handle}></input></p>
+        <p>이메일 : <input type="text" value={email} onChange={eHandle}></input></p>
+        <button type="submit">제출하기</button>
+      </form>
+      {form && (<p> 제출 : {form.name} {form.email} </p>)}
     </div>
-  )
+  ) 
 }
+
+
 
 const App = () => {
   return (
-    <FruitList fruits={fruits}/>
+    <InfoForm/>
   )
 }
 
