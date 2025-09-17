@@ -1,44 +1,46 @@
 import './App.css'
 import {useState} from 'react'
+import {useEffect} from "react";
 
-function InfoForm(){
-  const [name,setName] =useState("");
-  const [email,setEmail] = useState("");
-  const [form, setForm]=useState("");
+ function Timer(){
+  const [count,setCount] = useState(10);
+  const [isRun, setIsRun]= useState(false);
 
-  const handle=(e)=>{
-    setName(e.target.value);
-  }
+  useEffect(()=>{
+    console.log(isRun);
+    if(!isRun) return;
 
-  const eHandle=(e)=>{
-    setEmail(e.target.value);
-  }
+    const Interval = setInterval(()=>{
+      setCount(prevCount => {
+        if (prevCount <= 1) {
+          setIsRun(false);
+          return 0;
+        }
+        return prevCount - 1;
+      });
+    },1000)
 
-  const submitHandle=(e)=>{
-    e.preventDefault();
-    setForm({name, email});
-
-    setName("");
-    setEmail("");
+    return()=>clearInterval(Interval);
+  },[isRun]);
+  
+  const handle=()=>{
+    console.log('시작버튼');
+    setIsRun(true);
   }
 
   return(
-    <div>
-      <form onSubmit={submitHandle}>
-        <p>이름 : <input type="text" value={name} onChange={handle}></input></p>
-        <p>이메일 : <input type="text" value={email} onChange={eHandle}></input></p>
-        <button type="submit">제출하기</button>
-      </form>
-      {form && (<p> 제출 : {form.name} {form.email} </p>)}
-    </div>
-  ) 
-}
+    <>
+      <h2>{count}</h2>
+      <button onClick={handle}>시작</button>
+    </>
+  )
+ }
 
 
 
 const App = () => {
   return (
-    <InfoForm/>
+    <Timer/>
   )
 }
 
